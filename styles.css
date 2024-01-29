@@ -40,3 +40,6 @@ body{
     position: relative;
     top: 4px;
 }
+.filter{
+    margin: 10px;
+}
