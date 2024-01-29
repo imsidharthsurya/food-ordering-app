@@ -26,15 +26,30 @@ body{
 }
 .restaurant-card{
     margin: 15px;
+    width: 210px;
+    
+}
+.ellipsis{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 .restaurant-card:hover{
     cursor: pointer;
+    transform: scale(0.96);
 }
 .restaurant-img{
-    width: 210px;
-    height: 150px;
+    width: 200px;
+    height: 130px;
     border-radius: 20px;
     object-fit: cover;
+    margin-bottom: 0;
+}
+.mrginzero{
+    margin: 5px 0px;
+}
+.fnt{
+    color:#676A6D
 }
 .star-png{
     position: relative;
