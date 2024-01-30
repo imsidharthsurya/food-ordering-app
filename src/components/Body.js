@@ -1,8 +1,18 @@
-import {useState} from "react"
+import {useState,useEffect} from "react"
 import RestaurantCard from "./RestaurantCard";
 import restaurantData from "../utils/mockData";
 const Body=()=>{
     const [restaurantList,setRestaurantList]=useState(restaurantData)
+    useEffect(()=>{
+        getDataFromAPI();
+        console.log("useEffect Api called")
+    },[]);
+    const getDataFromAPI=async()=>{
+        const data=await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4322123&lng=78.3963095&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+        const json=await data.json();
+        // console.log("json data is: ",json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants)
+        setRestaurantList(json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants)
+    }
     return (
         <div className="body">
             <div className="search">
@@ -22,7 +32,7 @@ const Body=()=>{
                     })
                 }
                 
-                
+                {console.log("component rendered")}
             </div>
         </div>
     )
