@@ -58,3 +58,30 @@ body{
 .filter{
     margin: 10px;
 }
+.shimmer-img{
+    width: 200px;
+    height: 130px;
+    background-color: #f0f0f0;
+    border-radius: 20px;
+    margin: 10px 0;
+}
+.shimmer-h1{
+    width: 150px;
+    height: 11px;
+    background-color: #f0f0f0;
+}
+.shimmer-p{
+    width: 120px;
+    height: 11px;
+    background-color: #f0f0f0;
+    margin: 10px 0;
+}
+.shimmer-ui{
+    margin-left: 50px;
+    margin-top: 50px;
+}
+.main-shimmer{
+    display: flex;
+    flex-wrap: wrap;
+
+}
