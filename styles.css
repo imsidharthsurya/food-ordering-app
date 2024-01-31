@@ -57,6 +57,7 @@ body{
 }
 .filter{
     margin: 10px;
+    padding: 5px;
 }
 .shimmer-img{
     width: 200px;
@@ -84,4 +85,11 @@ body{
     display: flex;
     flex-wrap: wrap;
 
+}
+.search{
+    display: flex;
+}
+.search-rest{
+    margin: 10px;
+    padding: 5px;
 }

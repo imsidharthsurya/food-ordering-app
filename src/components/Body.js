@@ -5,6 +5,7 @@ import Shimmer from "./Shimmer";
 const Body=()=>{
 
     const [restaurantList,setRestaurantList]=useState([])
+    const [searchRestaurant,setSearchRestaurant]=useState("")
 
     useEffect(()=>{
         getDataFromAPI();
@@ -23,13 +24,23 @@ const Body=()=>{
     </>): (
         <div className="body">
             <div className="search">
+                <div className="search-rest">
+                    <input type="text" placeholder="search" value={searchRestaurant} onChange={(e)=>{
+                        setSearchRestaurant(e.target.value)
+                        
+                    }}/>
+                    <button className="search-btn" onClick={()=>{
+                        console.log(searchRestaurant)
+                    }}>Search</button>
+                </div>
+                <div className="filter-rest">
                 <button className="filter" onClick={()=>{
                     const temp=restaurantData.filter((restaurant)=>{
                         return restaurant.info.avgRating>4.3;
                     })
                     setRestaurantList(temp)
-                }}>Top Rated Restaurant</button>
-                <h3>Search Restaurant</h3>
+                }}>Top Rated Restaurant</button></div>
+                
             </div>
             <div className="restaurant-container">
                 {
