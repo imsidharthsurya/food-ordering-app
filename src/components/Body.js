@@ -44,10 +44,10 @@ const Body=()=>{
                 </div>
                 <div className="filter-rest">
                 <button className="filter" onClick={()=>{
-                    const temp=restaurantData.filter((restaurant)=>{
+                    const temp=restaurantList.filter((restaurant)=>{
                         return restaurant.info.avgRating>4.3;
                     })
-                    setRestaurantList(temp)
+                    setFilteredRestrauntList(temp)
                 }}>Top Rated Restaurant</button></div>
                 
             </div>
