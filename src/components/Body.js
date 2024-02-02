@@ -3,7 +3,7 @@ import RestaurantCard from "./RestaurantCard";
 import restaurantData from "../utils/mockData";
 import Shimmer from "./Shimmer";
 const Body=()=>{
-
+    {console.log("component rendered")}
     const [restaurantList,setRestaurantList]=useState([])
     const [filteredRestrauntList,setFilteredRestrauntList]=useState([])
     const [searchRestaurantName,setSearchRestaurantName]=useState("")
@@ -59,8 +59,9 @@ const Body=()=>{
                     })
                 }
                 
-                {console.log("component rendered")}
+                
             </div>
+            
         </div>
     )
 }
