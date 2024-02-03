@@ -155,3 +155,6 @@ a{
     text-decoration: none;
     color: black;
 }
+.user-info{
+    border: 1px solid black;
+}
