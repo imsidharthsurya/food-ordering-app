@@ -10,8 +10,8 @@ const Shimmer=()=>{
     return (
         <div className="main-shimmer">
            {
-            arr.map(()=>{
-                return <UUi/>
+            arr.map((elem,ind)=>{
+                return <UUi key={ind}/>
             })
            }
             

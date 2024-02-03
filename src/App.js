@@ -6,13 +6,13 @@ import Footer from "./components/Footer"
 import About from "./components/About"
 import Contact from "./components/Contact"
 import ErrorPage from "./components/ErrorPage"
-import {createBrowserRouter,RouterProvider} from "react-router-dom"
+import {createBrowserRouter,RouterProvider,Outlet} from "react-router-dom"
 
 const AppLayout=()=>{
     return (
         <div className="main">
             <Header/>
-            <Body/>
+            <Outlet/>
             <Footer/>
         </div>
     )
@@ -22,18 +22,25 @@ const router=createBrowserRouter([
     {
         path:"/",
         element:<AppLayout/>,
-        errorElement:<ErrorPage/>
-    },
-    {
-        path:"/about",
-        element:<About/>,
-        errorElement:<ErrorPage/>
-    },
-    {
-        path:"/contact",
-        element:<Contact/>,
-        errorElement:<ErrorPage/>
-    },
+        errorElement:<ErrorPage/>,
+        children:[
+            {
+                path:"/",
+                element:<Body/>,
+                errorElement:<ErrorPage/>
+            },
+            {
+                path:"/about",
+                element:<About/>,
+                errorElement:<ErrorPage/>
+            },
+            {
+                path:"/contact",
+                element:<Contact/>,
+                errorElement:<ErrorPage/>
+            }
+        ]
+    }
 
 ])
 
