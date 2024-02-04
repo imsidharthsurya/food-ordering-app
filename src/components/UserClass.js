@@ -4,18 +4,37 @@ class UserClass extends Component{
     constructor(props){
         super(props);
         this.state={
-            count1:1,
-            count2:2
+            userInfo:{
+                name:"dummy name",
+                location:"default location"
+            }
         }
+        // console.log(this.props.name+" child constructor")
     }
+
+    async componentDidMount(){
+        // console.log(this.props.name+" child componentDidMount")
+        const data=await fetch("https://api.github.com/users/imsidharthsurya");
+        const json=await data.json();
+        console.log(json)
+        this.setState({
+            userInfo:json
+        })
+    }
+    componentDidUpdate(){
+        console.log("component did update called")
+    }
+    componentWillUnmount(){
+        console.log("component umounted")
+    }
+
     render(){
-        const {name,location}=this.props
+        // console.log(this.props.name+" child render")
+        debugger;
         return (
             <div className="user-info">
-                <h1>Count1: {this.state.count1}</h1>
-                <h1>Count2: {this.state.count2}</h1>
-                <h3>Name: {name}</h3>
-                <p>Location: {location}</p>
+                <h3>Name: {this.state.userInfo.name}</h3>
+                <p>Location: {this.state.userInfo.location}</p>
                 <p>Contact: sid2op</p>
             </div>
         )
