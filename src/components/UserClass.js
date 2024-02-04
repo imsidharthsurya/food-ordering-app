@@ -30,11 +30,12 @@ class UserClass extends Component{
 
     render(){
         // console.log(this.props.name+" child render")
-        debugger;
+        // debugger;
         return (
             <div className="user-info">
                 <h3>Name: {this.state.userInfo.name}</h3>
                 <p>Location: {this.state.userInfo.location}</p>
+                <img src={this.state.userInfo.avatar_url}/>
                 <p>Contact: sid2op</p>
             </div>
         )
