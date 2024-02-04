@@ -1,8 +1,8 @@
-import {useState,useEffect} from "react"
-import {IMG_URL,REST_INFO_URL} from "../utils/constants"
+import {IMG_URL} from "../utils/constants"
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import useRestaurantInfo from "../utils/useRestaurantInfo";
+
 const RestaurantInfo=()=>{
     const {resId}=useParams();//destructuring on the fly
     // console.log(resId)
