@@ -1,32 +1,29 @@
 import {useState,useEffect} from "react"
-import {IMG_URL} from "../utils/constants"
+import {IMG_URL,REST_INFO_URL} from "../utils/constants"
 import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
+import useRestaurantInfo from "../utils/useRestaurantInfo";
 const RestaurantInfo=()=>{
     const {resId}=useParams();//destructuring on the fly
-    console.log(resId)
-    const [restInfo,setRestInfo]=useState(null);
-    const [restMenu,setRestMenu]=useState([]);
-    useEffect(()=>{
-        fetchRestInfo();
-    },[])
-    const fetchRestInfo=async ()=>{
-        const restdata=await fetch("https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=17.4322123&lng=78.3963095&restaurantId="+resId+"&catalog_qa=undefined&submitAction=ENTER");
-        const json=await restdata.json();
-        setRestInfo(json.data.cards);//array of rest data
-        //b/c in api sometimes on index 1st carousel is coming rather than recommended
-        if(json.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards[1].card.card.title==="Recommended"){
-            setRestMenu(json.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards[1].card.card.itemCards)
-        }else{
-            setRestMenu(json.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards[2].card.card.itemCards)
-        }
-    }
+    // console.log(resId)
+    const restInfo=useRestaurantInfo(resId)
+    // console.log("restInfo is: ",restInfo)
+
+    //move shimmer ui above b/c we're setting restMenu from restInfo so if restInfo null better return first shimmer otherwise won't be able to set the restMenu
     if(restInfo===null){
         return <Shimmer/>
     }
     
+    let restMenu=[];
+    
+    //b/c in api sometimes on index 1st carousel is coming rather than recommended
+    if(restInfo[2].groupedCard.cardGroupMap.REGULAR.cards[1].card.card.title==="Recommended"){
+        restMenu=restInfo[2].groupedCard.cardGroupMap.REGULAR.cards[1].card.card.itemCards
+    }else{
+        restMenu=restInfo[2].groupedCard.cardGroupMap.REGULAR.cards[2].card.card.itemCards
+    }
+
     return (
-        
         <div className="restaurant-info-main-div">
             <h2 className="rest-name">{restInfo[0].card.card.info.name}</h2>
             <p className="rest-details">{restInfo[0].card.card.info.cuisines.join(", ")}</p>
