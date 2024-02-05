@@ -155,9 +155,7 @@ a{
     text-decoration: none;
     color: black;
 }
-.user-info{
-    border: 1px solid black;
-}
+
 
 .rest-shim1{
     width: 350px;
@@ -180,3 +178,15 @@ a{
 }
 
 
+.user-info{
+    display: flex;
+    margin-top: 70px;
+    margin-left: 10px;
+}
+.user-details{
+    margin-left: 10px;
+}
+.user-pic{
+    width: 100px;
+    object-fit: cover;
+}

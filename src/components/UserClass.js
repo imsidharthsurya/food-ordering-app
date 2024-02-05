@@ -33,10 +33,13 @@ class UserClass extends Component{
         // debugger;
         return (
             <div className="user-info">
+                <img className="user-pic" src={this.state.userInfo.avatar_url}/>
+                <div className="user-details">
                 <h3>Name: {this.state.userInfo.name}</h3>
                 <p>Location: {this.state.userInfo.location}</p>
-                <img src={this.state.userInfo.avatar_url}/>
+                
                 <p>Contact: sid2op</p>
+                </div>
             </div>
         )
     }

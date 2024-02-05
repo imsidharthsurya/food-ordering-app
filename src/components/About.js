@@ -24,6 +24,7 @@ class About extends React.Component{
         console.log("parent render");
         return (
             <div className="about-us">
+            
              <UserClass name={"first"} location={"HI tech city, Hyderabad"}/>
             </div>
         )
