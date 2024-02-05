@@ -1,5 +1,5 @@
 import {IMG_URL} from "../utils/constants"
-import Shimmer from "./Shimmer";
+import RestaurantInfoShimmer from "./RestaurantInfoShimmer";
 import { useParams } from "react-router-dom";
 import useRestaurantInfo from "../utils/useRestaurantInfo";
 
@@ -11,7 +11,7 @@ const RestaurantInfo=()=>{
 
     //move shimmer ui above b/c we're setting restMenu from restInfo so if restInfo null better return first shimmer otherwise won't be able to set the restMenu
     if(restInfo===null){
-        return <Shimmer/>
+        return <RestaurantInfoShimmer/>
     }
     
     let restMenu=[];
