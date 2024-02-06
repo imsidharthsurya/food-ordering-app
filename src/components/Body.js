@@ -41,18 +41,18 @@ const Body=()=>{
         <Shimmer/>   
     </>): (
         <div className="body">
-            <div className="search">
-                <div className="search-rest">
-                    <input type="text" placeholder="search" value={searchRestaurantName} onChange={(e)=>{
+            <div className="search flex items-center">
+                <div className="search-rest m-10">
+                    <input type="text" className="border border-solid border-black px-2 py-1 rounded-md" placeholder="search" value={searchRestaurantName} onChange={(e)=>{
                         setSearchRestaurantName(e.target.value)
                         
                     }}/>
-                    <button className="search-btn" onClick={()=>{
+                    <button className="search-btn ml-3 mr-8 bg-orange-200 px-3 py-1 rounded-md" onClick={()=>{
                         searchRestaurant(searchRestaurantName);
                     }}>Search</button>
                 </div>
                 <div className="filter-rest">
-                <button className="filter" onClick={()=>{
+                <button className="filter bg-orange-200 px-3 py-2 rounded-lg" onClick={()=>{
                     const temp=restaurantList.filter((restaurant)=>{
                         return restaurant.info.avgRating>4.3;
                     })
