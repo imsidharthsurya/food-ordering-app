@@ -60,7 +60,7 @@ const Body=()=>{
                 }}>Top Rated Restaurant</button></div>
                 
             </div>
-            <div className="restaurant-container">
+            <div className="restaurant-container flex flex-wrap ml-9">
                 {
                     //to write js
                     filteredRestrauntList.map((restaurant)=>{
