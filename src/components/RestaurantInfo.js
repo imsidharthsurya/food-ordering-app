@@ -24,31 +24,31 @@ const RestaurantInfo=()=>{
     }
 
     return (
-        <div className="restaurant-info-main-div">
-            <h2 className="rest-name">{restInfo[0].card.card.info.name}</h2>
-            <p className="rest-details">{restInfo[0].card.card.info.cuisines.join(", ")}</p>
-            <p className="rest-details">{restInfo[0].card.card.info.locality +", "+restInfo[0].card.card.info.sla.lastMileTravelString}</p>
-            <p className="rest-details"><img src={IMG_URL+restInfo[0].card.card.info.feeDetails.icon} className="rest-delivery-logo"/>{" "+restInfo[0].card.card.info.feeDetails.message} </p>
-            <h3 className="recommended-item">Recommended {"("+restMenu.length+")"}</h3>
+        <div className="restaurant-info-main-div w-[70%] mt-12 mx-auto">
+            <h2 className="rest-name font-bold text-xl">{restInfo[0].card.card.info.name}</h2>
+            <p className="rest-details text-sm font-light mt-2">{restInfo[0].card.card.info.cuisines.join(", ")}</p>
+            <p className="rest-details text-sm font-light">{restInfo[0].card.card.info.locality +", "+restInfo[0].card.card.info.sla.lastMileTravelString}</p>
+            {restInfo[0].card.card.info.feeDetails.message?<p className="rest-details text-sm font-light mt-4"><img src={IMG_URL+restInfo[0].card.card.info.feeDetails.icon} className="rest-delivery-logo w-6 inline"/>{" "+restInfo[0].card.card.info.feeDetails.message} </p>:null}
+            <h3 className="recommended-item text-lg mt-8 font-bold">Recommended {"("+restMenu.length+")"}</h3>
             <ul>
                  { 
                     restMenu.map((rec)=>{
-                        return <div className="rest-menu-info-div">
-                                <li className="rest-menu-list">
+                        return <div className="rest-menu-info-div mt-8">
+                                <li className="rest-menu-list flex justify-between">
                                     <div className="rest-info">
                                         {
-                                            (rec.card.info.itemAttribute.vegClassifier==="NONVEG")?<img className="nonveg-logo" src={"https://upload.wikimedia.org/wikipedia/commons/b/ba/Non_veg_symbol.svg"} alt="nonveg"/>:<img className="veg-logo" src={"https://upload.wikimedia.org/wikipedia/commons/7/78/Indian-vegetarian-mark.svg"} alt="veg"/>
+                                            (rec.card.info.itemAttribute.vegClassifier==="NONVEG")?<img className="nonveg-logo w-5" src={"https://upload.wikimedia.org/wikipedia/commons/b/ba/Non_veg_symbol.svg"} alt="nonveg"/>:<img className="veg-logo w-4" src={"https://upload.wikimedia.org/wikipedia/commons/7/78/Indian-vegetarian-mark.svg"} alt="veg"/>
                                         }
-                                        <p className="item-name">{rec.card.info.name} </p>
-                                        <p> ₹{rec.card.info.price/100 || rec.card.info.variantsV2.variantGroups[0].variations[0].price}</p>
-                                        <p className="item-desc">{rec.card.info.description}</p>
+                                        <p className="item-name font-semibold text-lg">{rec.card.info.name} </p>
+                                        <p className="text-md"> ₹{rec.card.info.price/100 || rec.card.info.variantsV2.variantGroups[0].variations[0].price}</p>
+                                        <p className="item-desc text-sm text-gray-400 mt-3">{rec.card.info.description}</p>
                                     </div>
-                                    <div className="rest-img-div">
-                                        <img className="rest-info-img" src={IMG_URL+rec.card.info.imageId}/>
+                                    <div className="rest-img-div ml-8">
+                                        <img className="rest-info-img w-28 h-24 rounded-lg object-cover max-w-none" src={IMG_URL+rec.card.info.imageId}/>
                                     </div>
                                 
                                </li>
-                               <hr className="hr-line"/>
+                               <hr className="hr-line mt-8"/>
                                
                             </div>
                     })
