@@ -47,12 +47,12 @@ const Body=()=>{
                         setSearchRestaurantName(e.target.value)
                         
                     }}/>
-                    <button className="search-btn ml-3 mr-8 bg-orange-200 px-3 py-1 rounded-md" onClick={()=>{
+                    <button className="search-btn ml-3 mr-8 bg-orange-200 px-3 py-1 rounded-md hover:shadow-md" onClick={()=>{
                         searchRestaurant(searchRestaurantName);
                     }}>Search</button>
                 </div>
                 <div className="filter-rest">
-                <button className="filter bg-orange-200 px-3 py-2 rounded-lg" onClick={()=>{
+                <button className="filter bg-orange-200 px-3 py-2 rounded-lg hover:shadow-md" onClick={()=>{
                     const temp=restaurantList.filter((restaurant)=>{
                         return restaurant.info.avgRating>4.3;
                     })

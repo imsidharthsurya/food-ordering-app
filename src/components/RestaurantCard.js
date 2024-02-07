@@ -2,7 +2,7 @@ import {IMG_URL} from "../utils/constants"
 const RestaurantCard=({name,cuisines,sla,avgRating,cloudinaryImageId,areaName})=>{
     
     return (
-        <div className="restaurant-card m-4 w-[200px]">
+        <div className="restaurant-card m-4 w-[200px] hover:scale-95">
             <img className="restaurant-img w-[200px] h-[130px] rounded-lg" alt="restaurant-img" src={IMG_URL+cloudinaryImageId}/>
             
             <h3 className="ellipsis mrginzero truncate font-bold pt-3 text-lg">{name}</h3>
