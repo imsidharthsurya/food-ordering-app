@@ -1,29 +1,46 @@
-import {IMG_URL} from "../utils/constants"
+import { useState,useEffect } from "react";
+import {IMG_URL,LOCATION_URL} from "../utils/constants"
 import RestaurantInfoShimmer from "./RestaurantInfoShimmer";
 import { useParams } from "react-router-dom";
-import useRestaurantInfo from "../utils/useRestaurantInfo";
+// import useRestaurantInfo from "../utils/useRestaurantInfo";
 import star from "../img/star.png"
+import {REST_INFO_URL} from "../utils/constants"
 
+let restMenu=[]
 const RestaurantInfo=()=>{
     const {resId}=useParams();//destructuring on the fly
+    const [restInfo,setRestInfo]=useState(null);
     // console.log(resId)
-    const restInfo=useRestaurantInfo(resId)
-    // console.log("restInfo is: ",restInfo)
+    console.log("restMenu is: ",restMenu)
+    // const restInfo=useRestaurantInfo(resId,restMenu)
+    useEffect(()=>{
+        fetchRestInfo();
+    },[])
+    const fetchRestInfo=async ()=>{
+        // const restdata=await fetch(REST_INFO_URL+resId);
+        const locData=await fetch(LOCATION_URL);
+        const jsonLoc=await locData.json();
+        const {lat,lon}=jsonLoc
+        // console.log(lat,lng)
+        // console.log(resId)
+        console.log("url to get restrauntInfo is: ",REST_INFO_URL+`lat=${lat}&lng=${lon}&restaurantId=${resId}`)
+        const restdata=await fetch(REST_INFO_URL+`lat=${lat}&lng=${lon}&restaurantId=${resId}`);
+        const json=await restdata.json();
+        if(json.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards[1].card.card.title==="Recommended"){
+            restMenu=json.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards[1].card.card.itemCards
+        }else{
+            restMenu=json.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards[2].card.card.itemCards
+        }
+        setRestInfo(json.data.cards);//array of restaurant data
+    }
 
     //move shimmer ui above b/c we're setting restMenu from restInfo so if restInfo null better return first shimmer otherwise won't be able to set the restMenu
     if(restInfo===null){
         return <RestaurantInfoShimmer/>
     }
     
-    let restMenu=[];
-    
-    //b/c in api sometimes on index 1st carousel is coming rather than recommended
-    if(restInfo[2].groupedCard.cardGroupMap.REGULAR.cards[1].card.card.title==="Recommended"){
-        restMenu=restInfo[2].groupedCard.cardGroupMap.REGULAR.cards[1].card.card.itemCards
-    }else{
-        restMenu=restInfo[2].groupedCard.cardGroupMap.REGULAR.cards[2].card.card.itemCards
-    }
-
+    console.log("rest Menu is ",restMenu)
+    console.log("veg type is: ",restMenu[0].card.info.itemAttribute.vegClassifier)
     return (
         <div className="restaurant-info-main-div w-[70%] mt-12 mx-auto">
             <div className="flex justify-between">
@@ -41,8 +58,8 @@ const RestaurantInfo=()=>{
                 </div>
             </div>
             <hr className="mt-8"/>
-            <h3 className="recommended-item text-lg mt-8 font-bold">Recommended {"("+restMenu.length+")"}</h3>
-            <ul>
+            {(restMenu && restMenu.length>=1)? <h3 className="recommended-item text-lg mt-8 font-bold">Recommended {"("+restMenu.length+")"}</h3>:<h3 className="text-lg mt-8 font-bold">Recommendation (0)</h3>}
+            {(restMenu && restMenu.length>=1)?<ul>
                  { 
                     restMenu.map((rec)=>{
                         return <div className="rest-menu-info-div mt-8">
@@ -67,7 +84,7 @@ const RestaurantInfo=()=>{
 
                 }
                 
-            </ul>
+            </ul>:<h1 className="mt-3 text-md">No Recommended item</h1>}
         </div>
     )
 }
