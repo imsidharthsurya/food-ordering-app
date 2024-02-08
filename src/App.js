@@ -6,6 +6,7 @@ import Footer from "./components/Footer"
 import About from "./components/About"
 import Contact from "./components/Contact"
 import ErrorPage from "./components/ErrorPage"
+import NewHeader from "./components/NewHeader"
 import RestaurantInfo from "./components/RestaurantInfo"
 // import Grocery from "./components/Grocery"
 import {createBrowserRouter,RouterProvider,Outlet} from "react-router-dom"
@@ -14,7 +15,7 @@ const Grocery=lazy(()=>import("./components/Grocery"));
 const AppLayout=()=>{
     return (
         <div className="main">
-            <Header/>
+            <NewHeader/>
             <Outlet/>
             <Footer/>
         </div>
