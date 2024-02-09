@@ -26,10 +26,10 @@ const RestaurantInfo=()=>{
         console.log("url to get restrauntInfo is: ",REST_INFO_URL+`lat=${lat}&lng=${lon}&restaurantId=${resId}`)
         const restdata=await fetch(REST_INFO_URL+`lat=${lat}&lng=${lon}&restaurantId=${resId}`);
         const json=await restdata.json();
-        if(json.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards[1].card.card.title==="Recommended"){
-            restMenu=json.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards[1].card.card.itemCards
+        if(json.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.title==="Recommended"){
+            restMenu=json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards
         }else{
-            restMenu=json.data.cards[2].groupedCard.cardGroupMap.REGULAR.cards[2].card.card.itemCards
+            restMenu=json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards
         }
         setRestInfo(json.data.cards);//array of restaurant data
     }
@@ -39,8 +39,7 @@ const RestaurantInfo=()=>{
         return <RestaurantInfoShimmer/>
     }
     
-    console.log("rest Menu is ",restMenu)
-    console.log("veg type is: ",restMenu[0].card.info.itemAttribute.vegClassifier)
+    
     return (
         <div className="restaurant-info-main-div w-[70%] mt-12 mx-auto">
             <div className="flex justify-between">
@@ -62,11 +61,11 @@ const RestaurantInfo=()=>{
             {(restMenu && restMenu.length>=1)?<ul>
                  { 
                     restMenu.map((rec)=>{
-                        return <div className="rest-menu-info-div mt-8">
+                        return <div key={rec.card.info.id} className="rest-menu-info-div mt-8">
                                 <li className="rest-menu-list flex justify-between">
                                     <div className="rest-info">
                                         {
-                                            (rec.card.info.itemAttribute.vegClassifier==="NONVEG")?<img className="nonveg-logo w-5" src={"https://upload.wikimedia.org/wikipedia/commons/b/ba/Non_veg_symbol.svg"} alt="nonveg"/>:<img className="veg-logo w-4" src={"https://upload.wikimedia.org/wikipedia/commons/7/78/Indian-vegetarian-mark.svg"} alt="veg"/>
+                                            (rec.card.info.itemAttribute && rec.card.info.itemAttribute.vegClassifier==="NONVEG")?<img className="nonveg-logo w-5" src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Non_veg_symbol.svg" alt="nonveg"/>:<img className="veg-logo w-4" src="https://upload.wikimedia.org/wikipedia/commons/7/78/Indian-vegetarian-mark.svg" alt="veg"/>
                                         }
                                         <p className="item-name font-semibold text-lg">{rec.card.info.name} </p>
                                         <p className="text-md"> ₹{rec.card.info.price/100 || rec.card.info.variantsV2.variantGroups[0].variations[0].price}</p>

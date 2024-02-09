@@ -8,7 +8,7 @@ const UUi=()=>{
 const Shimmer=()=>{
     var arr=[1,2,1,2,1,2,1,2,1,2];
     return (
-        <div className="main-shimmer flex flex-wrap mt-20 ml-8">
+        <div className="main-shimmer flex flex-wrap md:mt-20 ml-4">
            {
             arr.map((elem,ind)=>{
                 return <UUi key={ind}/>

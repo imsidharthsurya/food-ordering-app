@@ -32,13 +32,13 @@ class UserClass extends Component{
         // console.log(this.props.name+" child render")
         // debugger;
         return (
-            <div className="user-info">
-                <img className="user-pic" src={this.state.userInfo.avatar_url}/>
-                <div className="user-details">
-                <h3>Name: {this.state.userInfo.name}</h3>
-                <p>Location: {this.state.userInfo.location}</p>
-                
-                <p>Contact: sid2op</p>
+            <div className="user-info flex sm:mx-auto sm:w-[50%] mt-8 ml-8">
+                <img className="user-pic w-36" src={this.state.userInfo.avatar_url}/>
+                <div className="user-details ml-6 mt-8">
+                    <h3><strong className="text-lg">Name:</strong> {this.state.userInfo.name}</h3>
+                    <p><strong className="text-lg">Location:</strong> {this.state.userInfo.location}</p>
+                    
+                    <p><strong className="text-lg">Contact:</strong> @sid2op</p>
                 </div>
             </div>
         )
