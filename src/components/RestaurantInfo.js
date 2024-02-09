@@ -2,17 +2,16 @@ import { useState,useEffect } from "react";
 import {IMG_URL,LOCATION_URL} from "../utils/constants"
 import RestaurantInfoShimmer from "./RestaurantInfoShimmer";
 import { useParams } from "react-router-dom";
+import RestaurantCategoryAccordion from "./RestaurantCategoryAccordion"
 // import useRestaurantInfo from "../utils/useRestaurantInfo";
 import star from "../img/star.png"
 import {REST_INFO_URL} from "../utils/constants"
 
-let restMenu=[]
 const RestaurantInfo=()=>{
     const {resId}=useParams();//destructuring on the fly
     const [restInfo,setRestInfo]=useState(null);
     // console.log(resId)
-    console.log("restMenu is: ",restMenu)
-    // const restInfo=useRestaurantInfo(resId,restMenu)
+
     useEffect(()=>{
         fetchRestInfo();
     },[])
@@ -26,20 +25,19 @@ const RestaurantInfo=()=>{
         console.log("url to get restrauntInfo is: ",REST_INFO_URL+`lat=${lat}&lng=${lon}&restaurantId=${resId}`)
         const restdata=await fetch(REST_INFO_URL+`lat=${lat}&lng=${lon}&restaurantId=${resId}`);
         const json=await restdata.json();
-        if(json.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.title==="Recommended"){
-            restMenu=json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card?.itemCards
-        }else{
-            restMenu=json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards
-        }
         setRestInfo(json.data.cards);//array of restaurant data
     }
 
-    //move shimmer ui above b/c we're setting restMenu from restInfo so if restInfo null better return first shimmer otherwise won't be able to set the restMenu
     if(restInfo===null){
         return <RestaurantInfoShimmer/>
     }
     
-    
+    //filter out all the listItem categories to display the item menu
+    const categories=restInfo[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((item)=>{
+        return item.card.card["@type"]==="type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory" || item.card.card["@type"]==="type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    })
+    console.log(categories)
+
     return (
         <div className="restaurant-info-main-div w-[70%] mt-12 mx-auto">
             <div className="flex justify-between">
@@ -57,33 +55,14 @@ const RestaurantInfo=()=>{
                 </div>
             </div>
             <hr className="mt-8"/>
-            {(restMenu && restMenu.length>=1)? <h3 className="recommended-item text-lg mt-8 font-bold">Recommended {"("+restMenu.length+")"}</h3>:<h3 className="text-lg mt-8 font-bold">Recommendation (0)</h3>}
-            {(restMenu && restMenu.length>=1)?<ul>
-                 { 
-                    restMenu.map((rec)=>{
-                        return <div key={rec.card.info.id} className="rest-menu-info-div mt-8">
-                                <li className="rest-menu-list flex justify-between">
-                                    <div className="rest-info">
-                                        {
-                                            (rec.card.info.itemAttribute && rec.card.info.itemAttribute.vegClassifier==="NONVEG")?<img className="nonveg-logo w-5" src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Non_veg_symbol.svg" alt="nonveg"/>:<img className="veg-logo w-4" src="https://upload.wikimedia.org/wikipedia/commons/7/78/Indian-vegetarian-mark.svg" alt="veg"/>
-                                        }
-                                        <p className="item-name font-semibold text-lg">{rec.card.info.name} </p>
-                                        <p className="text-md"> ₹{rec.card.info.price/100 || rec.card.info.variantsV2.variantGroups[0].variations[0].price}</p>
-                                        <p className="item-desc text-sm text-gray-400 mt-3">{rec.card.info.description}</p>
-                                    </div>
-                                    <div className="rest-img-div ml-8">
-                                        <img className="rest-info-img w-28 h-24 rounded-lg object-cover max-w-none" src={IMG_URL+rec.card.info.imageId}/>
-                                    </div>
-                                
-                               </li>
-                               <hr className="hr-line mt-8"/>
-                               
-                            </div>
-                    })
-
-                }
-                
-            </ul>:<h1 className="mt-3 text-md">No Recommended item</h1>}
+            {/* below this we'll build accordion reading from categories array */}
+            {/* for this map over all the categories item & for each item we'll show one accordion */}
+            
+            {
+                categories.map((category)=>{
+                   return <RestaurantCategoryAccordion key={category.card.card.title} data={category.card.card}/>
+                })
+            }
         </div>
     )
 }
