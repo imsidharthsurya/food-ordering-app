@@ -42,17 +42,17 @@ const Body=()=>{
     </>): (
         <div className="body">
             <div className="search flex items-center">
-                <div className="search-rest m-10">
-                    <input type="text" className="border border-solid border-black px-2 py-1 rounded-md" placeholder="search" value={searchRestaurantName} onChange={(e)=>{
+                <div className="search-rest md:m-10 ml-5">
+                    <input type="text" className="border border-solid border-black p-1 md:px-2 md:py-1 rounded-md" placeholder="search" value={searchRestaurantName} onChange={(e)=>{
                         setSearchRestaurantName(e.target.value)
                         
                     }}/>
-                    <button className="search-btn ml-3 mr-8 bg-orange-200 px-3 py-1 rounded-md hover:shadow-md" onClick={()=>{
+                    <button className="search-btn ml-3 mr-8 bg-orange-200 p-1 md:px-3 md:py-1 rounded-md hover:shadow-md" onClick={()=>{
                         searchRestaurant(searchRestaurantName);
                     }}>Search</button>
                 </div>
                 <div className="filter-rest">
-                <button className="filter bg-orange-200 px-3 py-2 rounded-lg hover:shadow-md" onClick={()=>{
+                <button className="filter bg-orange-200 p-1 md:px-3 md:py-2 rounded-lg hover:shadow-md" onClick={()=>{
                     const temp=restaurantList.filter((restaurant)=>{
                         return restaurant.info.avgRating>4.3;
                     })
@@ -60,7 +60,7 @@ const Body=()=>{
                 }}>Top Rated Restaurant</button></div>
                 
             </div>
-            <div className="restaurant-container flex flex-wrap ml-9">
+            <div className="restaurant-container flex flex-wrap md:ml-9 md:mt-0 mt-10">
                 {
                     //to write js
                     filteredRestrauntList.map((restaurant)=>{
