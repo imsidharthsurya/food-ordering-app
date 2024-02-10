@@ -1,4 +1,4 @@
-import React,{lazy,Suspense} from "react"
+import React,{lazy,Suspense,useState,useEffect} from "react"
 import ReactDOM from "react-dom/client"
 import Body from "./components/Body"
 import Footer from "./components/Footer"
@@ -7,17 +7,28 @@ import Contact from "./components/Contact"
 import ErrorPage from "./components/ErrorPage"
 import NewHeader from "./components/NewHeader"
 import RestaurantInfo from "./components/RestaurantInfo"
+import UserContext from "./utils/UserContext"
 // import Grocery from "./components/Grocery"
 import {createBrowserRouter,RouterProvider,Outlet} from "react-router-dom"
 //lazy loading Grocery component
 const Grocery=lazy(()=>import("./components/Grocery"));
 const AppLayout=()=>{
+    const [naamOfUser,setNaamOfUser]=useState();
+    useEffect(()=>{
+        //api call to authenticate the user & after that set details
+        const data={
+            naam:"sidharth log"
+        }
+        setNaamOfUser(data.naam);
+    },[])
     return (
+        <UserContext.Provider value={{userName:naamOfUser}}>
         <div className="main">
             <NewHeader/>
             <Outlet/>
             <Footer/>
         </div>
+        </UserContext.Provider>
     )
 }
 

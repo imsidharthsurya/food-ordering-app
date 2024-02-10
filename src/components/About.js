@@ -1,5 +1,6 @@
 import UserClass from "./UserClass";
 import React from "react";
+import UserContext from "../utils/UserContext";
 // const About=()=>{
 //     return (
 //         <div className="about-us">
@@ -12,10 +13,12 @@ import React from "react";
 
 class About extends React.Component{
 
+    
     constructor (props){
         super(props)
         console.log("parent constructor");
         this.state={}
+       
     }
     componentDidMount(){
         console.log("parent componentDidMount")
@@ -24,7 +27,13 @@ class About extends React.Component{
         console.log("parent render");
         return (
             <div className="about-us">
-            
+                {/* <UserContext.Consumer>
+                    {
+                        (data)=>{
+                            return <h1 className="text-xl font-bold">{data.userName}</h1>
+                        }
+                    }
+                </UserContext.Consumer> */}
              <UserClass name={"first"} location={"HI tech city, Hyderabad"}/>
             </div>
         )
