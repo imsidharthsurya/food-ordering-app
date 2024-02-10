@@ -1,9 +1,17 @@
 import AcordianBody from "./AcordianBody"
 import { useState } from "react";
-const RestaurantCategoryAccordion=({data})=>{
+const RestaurantCategoryAccordion=({data,showAccordion,setAccordionIndex,hideAllAccordion})=>{
     // console.log(data)
     let allMenu=[];
-    const [showAccordion,setShowAcordion]=useState(false)
+    // const [showAccordion,setShowAcordion]=useState(false)
+    function toggleAcordian(){
+        // setShowAcordion(!showAccordion)
+        if(showAccordion){
+            hideAllAccordion()
+        }else{
+            setAccordionIndex()
+        }
+    }
     if(data["@type"]==="type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"){
         // allMenu=data.itemCards
         for(var i=0;i<data.itemCards.length;i++){
@@ -16,9 +24,7 @@ const RestaurantCategoryAccordion=({data})=>{
             }
         }
     }
-    function toggleAcordian(){
-        setShowAcordion(!showAccordion)
-    }
+    
     return (
         <div className="mt-20">
             {/* RestaurantCategoryAccordion */}

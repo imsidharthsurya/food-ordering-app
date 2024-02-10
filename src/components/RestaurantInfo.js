@@ -11,6 +11,7 @@ const RestaurantInfo=()=>{
     const {resId}=useParams();//destructuring on the fly
     const [restInfo,setRestInfo]=useState(null);
     // console.log(resId)
+    const [accordionIndex,setAccordionIndex]=useState(null)
 
     useEffect(()=>{
         fetchRestInfo();
@@ -59,8 +60,15 @@ const RestaurantInfo=()=>{
             {/* for this map over all the categories item & for each item we'll show one accordion */}
             
             {
-                categories.map((category)=>{
-                   return <RestaurantCategoryAccordion key={category.card.card.title} data={category.card.card}/>
+                categories.map((category,index)=>{
+                   return <RestaurantCategoryAccordion key={category.card.card.title} data={category.card.card} 
+                        showAccordion={index===accordionIndex?true:false}
+                        setAccordionIndex={()=>{
+                            setAccordionIndex(index)
+                        }}
+                        hideAllAccordion={()=>{
+                            setAccordionIndex(null)
+                        }}/>
                 })
             }
         </div>
