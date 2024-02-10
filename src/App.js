@@ -22,7 +22,7 @@ const AppLayout=()=>{
         setNaamOfUser(data.naam);
     },[])
     return (
-        <UserContext.Provider value={{userName:naamOfUser}}>
+        <UserContext.Provider value={{userName:naamOfUser,setNaamOfUser}}>
         <div className="main">
             <NewHeader/>
             <Outlet/>

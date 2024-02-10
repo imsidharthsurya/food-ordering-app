@@ -1,28 +1,18 @@
-import {useState,useEffect} from "react"
+import {useState,useEffect,useContext} from "react"
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import useRestaurantList from "../utils/useRestaurantList";
+
+import UserContext from "../utils/UserContext";
 const Body=()=>{
     
-    // const [restaurantList,setRestaurantList]=useState([])
+    const{userName,setNaamOfUser}=useContext(UserContext)
     
     const [filteredRestrauntList,setFilteredRestrauntList]=useState([])
     let restaurantList=useRestaurantList(setFilteredRestrauntList);
     const [searchRestaurantName,setSearchRestaurantName]=useState("")
-    // useEffect(()=>{
-    //     getDataFromAPI();
-    //     console.log("useEffect Api called")
-    // },[]);
-
-    // const getDataFromAPI=async()=>{
-    //     const data=await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.4322123&lng=78.3963095&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
-    //     const json=await data.json();
-    //     // console.log("json data is: ",json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants)
-    //     setRestaurantList(json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants)
-    //     setFilteredRestrauntList(json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants)
-    // }
     
     function searchRestaurant(restName){
         var temp= restaurantList.filter((rest)=>{
@@ -58,6 +48,14 @@ const Body=()=>{
                     })
                     setFilteredRestrauntList(temp)
                 }}>Top Rated Restaurant</button></div>
+
+                {/* taking name of context using input box data */}
+                {/* <div className="search-rest md:m-10 ml-5">
+                    <label>UserName: </label>
+                    <input type="text" className="border border-solid border-black p-1 md:px-2 md:py-1 rounded-md"  value={userName} onChange={(e)=>{
+                    setNaamOfUser(e.target.value)
+                }}/>
+                </div> */}
                 
             </div>
             <div className="restaurant-container flex flex-wrap md:ml-9 md:mt-0 mt-10">
