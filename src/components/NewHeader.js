@@ -3,8 +3,11 @@ import { Transition } from '@headlessui/react';
 import {LOGO_URL} from "../utils/constants"
 import useOnlineStatus from "../utils/useOnlineStatus"
 import { Link } from "react-router-dom";
+import UserContext from "../utils/UserContext";
+import { useContext } from "react";
 const NewHeader=()=>{
-    
+    const {userName}=useContext(UserContext);
+    console.log(userName)
     const [isOpen, setIsOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const [btnName,setBtnName]=useState("Login")
@@ -55,19 +58,20 @@ const NewHeader=()=>{
               {item==="Status"?onlineStatus?"Status: 🟢":"Status: 🔴":item}
             </li> */}
           <li className="mx-3">Status: {onlineStatus?"🟢":"🔴"}</li>
-                    <li><Link to="/"  className="mx-3">Home</Link></li>
-                    <li><Link to="/about" className="mx-3">About us</Link></li>
-                    <li><Link to="/contact" className="mx-3">Contact Us</Link></li>
-                    <li><Link to="/grocery" className="mx-3">Grocery</Link></li>
-                    <li><Link to="/" className="mx-3">Cart</Link></li>
-                    <button className="login" onClick={()=>{
+                    <li><Link to="/"  className="mx-3 p-2 hover:shadow-sm">Home</Link></li>
+                    <li><Link to="/about" className="mx-3 p-2 hover:shadow-sm">About us</Link></li>
+                    <li><Link to="/contact" className="mx-3 p-2 hover:shadow-sm">Contact Us</Link></li>
+                    <li><Link to="/grocery" className="mx-3 p-2 hover:shadow-sm">Grocery</Link></li>
+                    <li><Link to="/" className="mx-3 p-2 hover:shadow-sm">Cart</Link></li>
+                    <li><button className="login" onClick={()=>{
                         if(btnName=="Login")
                             setBtnName("Logout");
                         else{
                             setBtnName("Login")
                         }
                         console.log(btnName)
-                    }}>{btnName}</button>
+                    }}>{btnName}</button></li>
+                    <li className="mx-3">{userName}</li>
         </ul>
       )}
 
@@ -95,12 +99,12 @@ const NewHeader=()=>{
         <div className="fixed inset-y-0 right-0 z-50 w-64 bg-gray-300 p-4">
           <ul className="space-y-4">
           <li className="mx-4">Status: {onlineStatus?"🟢":"🔴"}</li>
-                    <li className="mx-4 hover:bg-white"><Link to="/">Home</Link></li>
-                    <li className="mx-4 hover:bg-white"><Link to="/about">About us</Link></li>
-                    <li className="mx-4 hover:bg-white"><Link to="/contact">Contact Us</Link></li>
-                    <li className="mx-4 hover:bg-white"><Link to="/grocery">Grocery</Link></li>
-                    <li className="mx-4 hover:bg-white">Cart</li>
-                    <button className="login mx-4 hover:bg-white" onClick={()=>{
+                    <li className="mx-4 p-2 hover:bg-white"><Link to="/">Home</Link></li>
+                    <li className="mx-4 p-2 hover:bg-white"><Link to="/about">About us</Link></li>
+                    <li className="mx-4 p-2 hover:bg-white"><Link to="/contact">Contact Us</Link></li>
+                    <li className="mx-4 p-2 hover:bg-white"><Link to="/grocery">Grocery</Link></li>
+                    <li className="mx-4 p-2 hover:bg-white"><Link to="/">Cart</Link></li>
+                    <button className="login mx-4 p-2 hover:bg-white" onClick={()=>{
                         if(btnName=="Login")
                             setBtnName("Logout");
                         else{
@@ -108,6 +112,7 @@ const NewHeader=()=>{
                         }
                         console.log(btnName)
                     }}>{btnName}</button>
+                    <li className="mx-4">{userName}</li>
           </ul>
         </div>
       </Transition>
