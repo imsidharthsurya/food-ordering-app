@@ -1,6 +1,14 @@
 import {IMG_URL} from "../utils/constants"
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
 const AcordianBody = ({ menuData }) => {
   // console.log("in accordion body",menuData)
+  const dispatch=useDispatch();
+  
+  const handleMenu=(item)=>{
+    dispatch(addItem(item))
+  }
+  
   return (
     <div>
     {menuData.map((menuDetails)=>{
@@ -39,7 +47,7 @@ const AcordianBody = ({ menuData }) => {
             className="rest-info-img w-28 h-24 rounded-lg object-cover max-w-none"
             src={IMG_URL + menuDetails.imageId}
           />
-          <button className="border px-7 py-2 text-green-600 text-xs font-semibold relative bottom-5 left-3 bg-white">ADD</button>
+          <button className="border px-7 py-2 text-green-600 text-xs font-semibold relative bottom-5 left-3 bg-white" onClick={()=>handleMenu(menuDetails)}>ADD</button>
         </div>
       </li>
     </div>

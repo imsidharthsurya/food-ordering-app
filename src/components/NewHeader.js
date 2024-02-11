@@ -5,7 +5,11 @@ import useOnlineStatus from "../utils/useOnlineStatus"
 import { Link } from "react-router-dom";
 import UserContext from "../utils/UserContext";
 import { useContext } from "react";
+import {useSelector} from "react-redux"
 const NewHeader=()=>{
+
+    const cartItems=useSelector((store)=> store.cart.items)
+    console.log(cartItems);
     const {userName}=useContext(UserContext);
     console.log(userName)
     const [isOpen, setIsOpen] = useState(false);
@@ -62,7 +66,7 @@ const NewHeader=()=>{
                     <li><Link to="/about" className="mx-3 p-2 hover:shadow-sm">About us</Link></li>
                     <li><Link to="/contact" className="mx-3 p-2 hover:shadow-sm">Contact Us</Link></li>
                     <li><Link to="/grocery" className="mx-3 p-2 hover:shadow-sm">Grocery</Link></li>
-                    <li><Link to="/" className="mx-3 p-2 hover:shadow-sm">Cart</Link></li>
+                    <li><Link to="/cart" className="mx-3 p-2 hover:shadow-sm">Cart- ({cartItems.length} Items)</Link></li>
                     <li><button className="login" onClick={()=>{
                         if(btnName=="Login")
                             setBtnName("Logout");
@@ -103,7 +107,7 @@ const NewHeader=()=>{
                     <li className="mx-4 p-2 hover:bg-white"><Link to="/about">About us</Link></li>
                     <li className="mx-4 p-2 hover:bg-white"><Link to="/contact">Contact Us</Link></li>
                     <li className="mx-4 p-2 hover:bg-white"><Link to="/grocery">Grocery</Link></li>
-                    <li className="mx-4 p-2 hover:bg-white"><Link to="/">Cart</Link></li>
+                    <li className="mx-4 p-2 hover:bg-white"><Link to="/cart">Cart- ({cartItems.length} Items)</Link></li>
                     <button className="login mx-4 p-2 hover:bg-white" onClick={()=>{
                         if(btnName=="Login")
                             setBtnName("Logout");

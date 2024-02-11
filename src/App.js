@@ -10,6 +10,7 @@ import RestaurantInfo from "./components/RestaurantInfo"
 import UserContext from "./utils/UserContext"
 import { Provider } from "react-redux"
 import appStore from "./utils/appStore"
+import Cart from "./components/Cart"
 // import Grocery from "./components/Grocery"
 import {createBrowserRouter,RouterProvider,Outlet} from "react-router-dom"
 
@@ -66,6 +67,10 @@ const router=createBrowserRouter([
             {
                 path:"/restaurant/:resId",
                 element:<RestaurantInfo/>
+            },
+            {
+                path:"/cart",
+                element:<Cart/>
             }
         ]
     }
