@@ -8,8 +8,11 @@ import ErrorPage from "./components/ErrorPage"
 import NewHeader from "./components/NewHeader"
 import RestaurantInfo from "./components/RestaurantInfo"
 import UserContext from "./utils/UserContext"
+import { Provider } from "react-redux"
+import appStore from "./utils/appStore"
 // import Grocery from "./components/Grocery"
 import {createBrowserRouter,RouterProvider,Outlet} from "react-router-dom"
+
 //lazy loading Grocery component
 const Grocery=lazy(()=>import("./components/Grocery"));
 const AppLayout=()=>{
@@ -22,6 +25,7 @@ const AppLayout=()=>{
         setNaamOfUser(data.naam);
     },[])
     return (
+        <Provider store={appStore}>
         <UserContext.Provider value={{userName:naamOfUser,setNaamOfUser}}>
         <div className="main">
             <NewHeader/>
@@ -29,6 +33,7 @@ const AppLayout=()=>{
             <Footer/>
         </div>
         </UserContext.Provider>
+        </Provider>
     )
 }
 
