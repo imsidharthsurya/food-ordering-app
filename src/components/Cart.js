@@ -11,7 +11,7 @@ const Cart=()=>{
         dispatch(clearCart());
     }
     return(
-        <div className="md:w-6/12 border border-black mt-20 mx-auto">
+        <div className="md:w-6/12 mt-20 mx-auto">
             {cartItems.length===0 && 
                 <div>
                     <h1 className="text-xl font-semibold text-center">Your cart is empty.</h1>
