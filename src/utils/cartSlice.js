@@ -14,6 +14,7 @@ const cartSlice=createSlice({
             state.items.pop();      //will remove last item directly
         },
         clearCart:(state,action)=>{
+            // state.items=[]
             state.items.length=0;
         }
     }
