@@ -1,13 +1,20 @@
 import { useState,useEffect } from "react";
 import {IMG_URL,LOCATION_URL} from "../utils/constants"
 import RestaurantInfoShimmer from "./RestaurantInfoShimmer";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import RestaurantCategoryAccordion from "./RestaurantCategoryAccordion"
+import { useSelector } from "react-redux";
 // import useRestaurantInfo from "../utils/useRestaurantInfo";
 import star from "../img/star.png"
 import {REST_INFO_URL} from "../utils/constants"
 
 const RestaurantInfo=()=>{
+    const cartItems=useSelector((store)=>store.cart.items)
+    let totalMoney=0;
+    cartItems.map((cartItem)=>{
+        totalMoney+=Number(cartItem.price/100)
+    })
+    console.log("total money in rest-info is: ",totalMoney)
     const {resId}=useParams();//destructuring on the fly
     const [restInfo,setRestInfo]=useState(null);
     // console.log(resId)
@@ -40,36 +47,45 @@ const RestaurantInfo=()=>{
     console.log(categories)
 
     return (
-        <div className="restaurant-info-main-div w-[70%] mt-12 mx-auto">
-            <div className="flex justify-between">
-                <div>
-                    <h2 className="rest-name font-bold text-xl">{restInfo[0].card.card.info.name}</h2>
-                    <p className="rest-details text-sm font-light mt-2">{restInfo[0].card.card.info.cuisines.join(", ")}</p>
-                    <p className="rest-details text-sm font-light">{restInfo[0].card.card.info.locality +", "+restInfo[0].card.card.info.sla.lastMileTravelString}</p>
-                    {restInfo[0].card.card.info.feeDetails.message?<p className="rest-details text-sm font-light mt-4"><img src={IMG_URL+restInfo[0].card.card.info.feeDetails.icon} className="rest-delivery-logo w-6 inline"/>{" "+restInfo[0].card.card.info.feeDetails.message} </p>:null}
+        <div className="w-[70%] mt-12 mx-auto">
+            <div className="restaurant-info-main-div">
+                <div className="flex justify-between">
+                    <div>
+                        <h2 className="rest-name font-bold text-xl">{restInfo[0].card.card.info.name}</h2>
+                        <p className="rest-details text-sm font-light mt-2">{restInfo[0].card.card.info.cuisines.join(", ")}</p>
+                        <p className="rest-details text-sm font-light">{restInfo[0].card.card.info.locality +", "+restInfo[0].card.card.info.sla.lastMileTravelString}</p>
+                        {restInfo[0].card.card.info.feeDetails.message?<p className="rest-details text-sm font-light mt-4"><img src={IMG_URL+restInfo[0].card.card.info.feeDetails.icon} className="rest-delivery-logo w-6 inline"/>{" "+restInfo[0].card.card.info.feeDetails.message} </p>:null}
+                    </div>
+                    <div className="inline-block p-2 border border-gray-300 border-solid h-20">
+                        <img src={star} className="inline-block w-5 relative bottom-0.5"/><span className="inline-block text-green-700 font-bold">&nbsp;{restInfo[0].card.card.info.avgRatingString}</span>
+                        <hr className="my-2"/>
+                        <p className="text-xs text-gray-500 font-semibold tracking-tighter">{restInfo[0].card.card.info.totalRatingsString}</p>
+                        
+                    </div>
                 </div>
-                <div className="inline-block p-2 border border-gray-300 border-solid h-20">
-                    <img src={star} className="inline-block w-5 relative bottom-0.5"/><span className="inline-block text-green-700 font-bold">&nbsp;{restInfo[0].card.card.info.avgRatingString}</span>
-                    <hr className="my-2"/>
-                    <p className="text-xs text-gray-500 font-semibold tracking-tighter">{restInfo[0].card.card.info.totalRatingsString}</p>
-                    
-                </div>
+                <hr className="mt-8"/>
+                {/* below this we'll build accordion reading from categories array */}
+                {/* for this map over all the categories item & for each item we'll show one accordion */}
+                
+                {
+                    categories.map((category,index)=>{
+                    return <RestaurantCategoryAccordion key={category.card.card.title} data={category.card.card} 
+                            showAccordion={index===accordionIndex?true:false}
+                            setAccordionIndex={()=>{
+                                setAccordionIndex(index)
+                            }}
+                            hideAllAccordion={()=>{
+                                setAccordionIndex(null)
+                            }}/>
+                    })
+                }
             </div>
-            <hr className="mt-8"/>
-            {/* below this we'll build accordion reading from categories array */}
-            {/* for this map over all the categories item & for each item we'll show one accordion */}
-            
             {
-                categories.map((category,index)=>{
-                   return <RestaurantCategoryAccordion key={category.card.card.title} data={category.card.card} 
-                        showAccordion={index===accordionIndex?true:false}
-                        setAccordionIndex={()=>{
-                            setAccordionIndex(index)
-                        }}
-                        hideAllAccordion={()=>{
-                            setAccordionIndex(null)
-                        }}/>
-                })
+                cartItems.length!==0 && 
+                <Link to="/cart"><div className="bg-[#60B246] flex justify-between p-3 fixed bottom-1 w-[70%] hover:cursor-pointer">
+                    <p className="text-white text-sm font-bold">{cartItems.length} Items | ₹ {totalMoney}</p>
+                    <p className="text-white font-bold">VIEW CART <img className="inline w-4 relative bottom-0.5" src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_28,h_28/ChatbotAssets/Checkout_Cart" alt="cart-logo"/></p>
+                </div></Link>
             }
         </div>
     )
