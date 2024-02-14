@@ -16,7 +16,7 @@ const Cart=()=>{
                 <div>
                     <h1 className="text-xl font-semibold text-center">Your cart is empty.</h1>
                     <p className="text-xs text-slate-600 tracking-wider text-center mt-2">You can go to home page to view more restaurants</p>
-                    <button className="bg-orange-500 text-white py-2 px-4 mt-7 ml-[30%] hover:shadow-md"><Link to="/" className="font-semibold">SEE RESTAURANTS NEAR YOU</Link></button>
+                    <button className="bg-orange-500 text-white py-2 px-4 mt-7 sm:ml-[30%] ml-[10%] hover:shadow-md"><Link to="/" className="font-semibold">SEE RESTAURANTS NEAR YOU</Link></button>
                     
                  </div>   
             }
