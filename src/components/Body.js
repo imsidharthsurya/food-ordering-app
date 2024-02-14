@@ -32,7 +32,7 @@ const Body=()=>{
     </>): (
         <div className="body">
             <div className="search sm:flex items-center">
-                <div className="search-rest sm:my-10 sm:mx-14 mx-20 my-10 flex">
+                <div className="search-rest sm:my-10 sm:mx-14 mx-10 my-10 flex">
                     <input type="text" className="border border-solid border-black p-1 md:px-2 md:py-1 rounded-md" placeholder="search" value={searchRestaurantName} onChange={(e)=>{
                         setSearchRestaurantName(e.target.value)
                         
