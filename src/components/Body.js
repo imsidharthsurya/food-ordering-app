@@ -58,7 +58,7 @@ const Body=()=>{
                 </div> */}
                 
             </div>
-            <div className="restaurant-container flex flex-wrap ml-9 mt-10">
+            <div className="restaurant-container flex flex-wrap sm:ml-9 ml:8 mt-10">
                 {
                     //to write js
                     filteredRestrauntList.map((restaurant)=>{

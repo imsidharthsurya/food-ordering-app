@@ -63,8 +63,8 @@ const NewHeader=()=>{
             </li> */}
           <li className="mx-3">Status: {onlineStatus?"🟢":"🔴"}</li>
                     <li><Link to="/"  className="mx-3 p-2 hover:shadow-sm">Home</Link></li>
-                    <li><Link to="/about" className="mx-3 p-2 hover:shadow-sm">About us</Link></li>
-                    <li><Link to="/contact" className="mx-3 p-2 hover:shadow-sm">Contact Us</Link></li>
+                    <li><Link to="/about" className="mx-3 p-2 hover:shadow-sm">About Me</Link></li>
+                    {/* <li><Link to="/contact" className="mx-3 p-2 hover:shadow-sm">Contact Us</Link></li> */}
                     <li><Link to="/grocery" className="mx-3 p-2 hover:shadow-sm">Grocery</Link></li>
                     <li><Link to="/cart" className="mx-3 p-2 hover:shadow-sm">Cart- ({cartItems.length} Items)</Link></li>
                     <li><button className="login" onClick={()=>{
@@ -104,8 +104,8 @@ const NewHeader=()=>{
           <ul className="space-y-4">
           <li className="mx-4">Status: {onlineStatus?"🟢":"🔴"}</li>
                     <li className="mx-4 p-2 hover:bg-white"><Link to="/">Home</Link></li>
-                    <li className="mx-4 p-2 hover:bg-white"><Link to="/about">About us</Link></li>
-                    <li className="mx-4 p-2 hover:bg-white"><Link to="/contact">Contact Us</Link></li>
+                    <li className="mx-4 p-2 hover:bg-white"><Link to="/about">About Me</Link></li>
+                    {/* <li className="mx-4 p-2 hover:bg-white"><Link to="/contact">Contact Us</Link></li> */}
                     <li className="mx-4 p-2 hover:bg-white"><Link to="/grocery">Grocery</Link></li>
                     <li className="mx-4 p-2 hover:bg-white"><Link to="/cart">Cart- ({cartItems.length} Items)</Link></li>
                     <button className="login mx-4 p-2 hover:bg-white" onClick={()=>{

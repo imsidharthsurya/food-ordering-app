@@ -2,7 +2,9 @@ const Grocery=()=>{
     
 
   return (
-    <h1>This is grocery which have other components as well</h1>
+    <div>
+    <h1 className="text-center text-red-500 mt-20 font-semibold text-lg">This Feature will be available soon !!!</h1>
+    </div>
   );
 }
 

@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client"
 import Body from "./components/Body"
 import Footer from "./components/Footer"
 import About from "./components/About"
+import NewAbout from "./components/NewAbout"
 import Contact from "./components/Contact"
 import ErrorPage from "./components/ErrorPage"
 import NewHeader from "./components/NewHeader"
@@ -28,9 +29,11 @@ const AppLayout=()=>{
     return (
         <Provider store={appStore}>
         <UserContext.Provider value={{userName:naamOfUser,setNaamOfUser}}>
-        <div className="main">
+        <div className="main flex flex-col min-h-screen">
             <NewHeader/>
+            <div className="flex-1">
             <Outlet/>
+            </div>
             <Footer/>
         </div>
         </UserContext.Provider>
@@ -51,7 +54,7 @@ const router=createBrowserRouter([
             },
             {
                 path:"/about",
-                element:<About/>,
+                element:<NewAbout/>,
                 errorElement:<ErrorPage/>
             },
             {
