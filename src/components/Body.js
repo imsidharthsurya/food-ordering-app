@@ -31,8 +31,8 @@ const Body=()=>{
         <Shimmer/>   
     </>): (
         <div className="body">
-            <div className="search flex items-center">
-                <div className="search-rest md:m-10 ml-5">
+            <div className="search sm:flex items-center">
+                <div className="search-rest sm:my-10 sm:mx-14 mx-20 my-10 flex">
                     <input type="text" className="border border-solid border-black p-1 md:px-2 md:py-1 rounded-md" placeholder="search" value={searchRestaurantName} onChange={(e)=>{
                         setSearchRestaurantName(e.target.value)
                         
@@ -41,7 +41,7 @@ const Body=()=>{
                         searchRestaurant(searchRestaurantName);
                     }}>Search</button>
                 </div>
-                <div className="filter-rest">
+                <div className="filter-rest sm:mx-0 mx-28">
                 <button className="filter bg-orange-200 p-1 md:px-3 md:py-2 rounded-lg hover:shadow-md" onClick={()=>{
                     const temp=restaurantList.filter((restaurant)=>{
                         return restaurant.info.avgRating>4.3;
