@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react";
-import {IMG_URL,LOCATION_URL} from "../utils/constants"
+import {IMG_URL} from "../utils/constants"
 import RestaurantInfoShimmer from "./RestaurantInfoShimmer";
 import { Link, useParams } from "react-router-dom";
 import RestaurantCategoryAccordion from "./RestaurantCategoryAccordion"
@@ -23,18 +23,45 @@ const RestaurantInfo=()=>{
     useEffect(()=>{
         fetchRestInfo();
     },[])
+
+    //before fetchRestInfo
     const fetchRestInfo=async ()=>{
         // const restdata=await fetch(REST_INFO_URL+resId);
-        const locData=await fetch(LOCATION_URL);
-        const jsonLoc=await locData.json();
-        const {lat,lon}=jsonLoc
+        // const locData=await fetch(LOCATION_URL);
+        // const jsonLoc=await locData.json();
+        // const {lat,lon}=jsonLoc
+        navigator.geolocation.getCurrentPosition(async(position) => {
+            let late = position.coords.latitude;
+            let long = position.coords.longitude;
+            const jsonLoc={lat:late,lon:long};
+            console.log("the latitude & longitude is: ",jsonLoc)
+            const {lat,lon}=jsonLoc;
+            console.log("url to get restrauntInfo is: ",REST_INFO_URL+`lat=${lat}&lng=${lon}&restaurantId=${resId}`)
+            const restdata=await fetch(REST_INFO_URL+`lat=${lat}&lng=${lon}&restaurantId=${resId}`);
+            const json=await restdata.json();
+            setRestInfo(json.data.cards);//array of restaurant data
+        },async(error)=>{
+            console.log("unable to access the location")
+            //in this case we'll hardcode the latitude & longitude to make the api call
+            let late = "17.3724";
+            let long = "78.4378";
+            const jsonLoc={lat:late,lon:long};
+            console.log("the latitude & longitude is: ",jsonLoc)
+            const {lat,lon}=jsonLoc;
+            console.log("url to get restrauntInfo is: ",REST_INFO_URL+`lat=${lat}&lng=${lon}&restaurantId=${resId}`)
+            const restdata=await fetch(REST_INFO_URL+`lat=${lat}&lng=${lon}&restaurantId=${resId}`);
+            const json=await restdata.json();
+            setRestInfo(json.data.cards);//array of restaurant data
+        })
         // console.log(lat,lng)
         // console.log(resId)
-        console.log("url to get restrauntInfo is: ",REST_INFO_URL+`lat=${lat}&lng=${lon}&restaurantId=${resId}`)
-        const restdata=await fetch(REST_INFO_URL+`lat=${lat}&lng=${lon}&restaurantId=${resId}`);
-        const json=await restdata.json();
-        setRestInfo(json.data.cards);//array of restaurant data
+        // console.log("url to get restrauntInfo is: ",REST_INFO_URL+`lat=${lat}&lng=${lon}&restaurantId=${resId}`)
+        // const restdata=await fetch(REST_INFO_URL+`lat=${lat}&lng=${lon}&restaurantId=${resId}`);
+        // const json=await restdata.json();
+        // setRestInfo(json.data.cards);//array of restaurant data
     }
+
+    //after fetchrestInfo
 
     if(restInfo===null){
         return <RestaurantInfoShimmer/>

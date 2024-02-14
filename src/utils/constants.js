@@ -10,5 +10,3 @@ export const IMG_URL="https://media-assets.swiggy.com/swiggy/image/upload/fl_los
 export const REST_INFO_URL="https://taaza-kitchen-server.onrender.com/api/menu?";
 
 export const REST_LIST_URL="https://taaza-kitchen-server.onrender.com/api/restaurants?";
-
-export const LOCATION_URL="http://ip-api.com/json/"
