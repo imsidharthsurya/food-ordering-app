@@ -58,6 +58,9 @@ const Body=()=>{
                 </div> */}
                 
             </div>
+            {
+                    filteredRestrauntList.length===0 && <h1 className="text-center text-red-500 mt-20 font-semibold text-lg">No Restaurants Found !</h1>
+            }
             <div className="restaurant-container flex flex-wrap sm:ml-9 ml:8 mt-10">
                 {
                     //to write js

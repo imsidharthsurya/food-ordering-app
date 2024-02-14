@@ -75,7 +75,7 @@ const NewHeader=()=>{
                         }
                         console.log(btnName)
                     }}>{btnName}</button></li>
-                    <li className="mx-3">{userName}</li>
+                    {/* <li className="mx-3">{userName}</li> */}
         </ul>
       )}
 
@@ -116,7 +116,7 @@ const NewHeader=()=>{
                         }
                         console.log(btnName)
                     }}>{btnName}</button>
-                    <li className="mx-4">{userName}</li>
+                    {/* <li className="mx-4">{userName}</li> */}
           </ul>
         </div>
       </Transition>
