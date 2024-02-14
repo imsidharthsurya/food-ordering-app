@@ -39,11 +39,11 @@ const Cart=()=>{
                     )}
                     <h1 className="ml-2">{item.name}</h1>
                 </div>
-                <h1>₹ {item.price/100}</h1>
+                <h1 className="mr-4">₹ {item.price/100}</h1>
                 
                 </div>
             })}
-            {cartItems.length!==0 && <h1 className="text-right mr-4 font-bold text-lg">To Pay: ₹{totalMoney}</h1>}
+            {cartItems.length!==0 && <h1 className="text-right mr-8 font-bold text-lg">To Pay: ₹{totalMoney}</h1>}
            {cartItems.length!==0 && <button className="p-3 font-medium bg-orange-500 hover:shadow-md rounded-md ml-[40%] mt-5 hover:text-white hover:border-white" onClick={handleClearCart}>Clear Cart</button>}
         </div>
     )
