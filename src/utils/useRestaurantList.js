@@ -15,9 +15,16 @@ const useRestaurantList=(setFilteredRestrauntList)=>{
         console.log("url to get restrauntInfo is: ",REST_LIST_URL+`lat=${lat}&lng=${lon}`);
         const data=await fetch(REST_LIST_URL+`lat=${lat}&lng=${lon}`);
         const json=await data.json();
-        // console.log("json data is: ",json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants)
-        setRestaurantList(json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants)
-        setFilteredRestrauntList(json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants)
+        let i=0;
+        json.data.cards.map((temp,index)=>{
+            if(temp.card.card.id==="restaurant_grid_listing"){
+                i=index;
+            }
+        })
+        // console.log(JSON.stringify(json.data.cards[i]))
+        console.log("json data is: ",json.data.cards[i].card.card.gridElements.infoWithStyle.restaurants)
+        setRestaurantList(json.data.cards[i].card.card.gridElements.infoWithStyle.restaurants)
+        setFilteredRestrauntList(json.data.cards[i].card.card.gridElements.infoWithStyle.restaurants)
     }
     return restaurantList;
 }

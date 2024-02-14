@@ -33,7 +33,7 @@ const NewHeader=()=>{
 
   return (
     <div className="flex items-center justify-between p-4">
-      <div className="text-white font-bold"><img className="logo-img w-32" alt="taaza-kitchen.png" src={LOGO_URL}/></div>
+      <div className="text-white font-bold"><Link to="/"><img className="logo-img w-32" alt="taaza-kitchen.png" src={LOGO_URL}/></Link></div>
 
       {isMobile ? (
         <button
