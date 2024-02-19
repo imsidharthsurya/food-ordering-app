@@ -9,6 +9,11 @@ const config = {
   // automock: false,
   // Stop running tests after `n` failures
   // bail: 0,
+  transform: {
+    '^.+\\.(js|jsx)$': 'babel-jest',
+    '^.+\\.(css|less|sass|scss)$': 'jest-transform-stub',
+    '^.+\\.(jpg|jpeg|png|gif|webp|svg)$': 'jest-transform-stub',
+  },
 
   // The directory where Jest should store its cached dependency information
   // cacheDirectory: "C:\\Users\\imsid\\AppData\\Local\\Temp\\jest",

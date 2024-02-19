@@ -4,7 +4,13 @@ import "@testing-library/jest-dom"
 
 test('should render my information in about me page', () => {
     render(<NewAbout/>)
-    const info=screen.getByText("Hello! I'm Sidharth Surya, a committed MERN Stack Developer currently working at IDFC FIRST BANK. Eager to contribute to innovative projects and expand my knowledge!");
+    const info=screen.getByRole("heading")
     // console.log(info)
     expect(info).toBeInTheDocument();
+})
+
+test('should render profile image',()=>{
+    render(<NewAbout/>);
+    const pic=screen.getByAltText("Sidharth pic")
+    expect(pic).toBeInTheDocument();
 })

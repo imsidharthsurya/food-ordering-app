@@ -7,31 +7,31 @@ import github from "../img/github.png"
 const NewAbout=()=>{
     return (
         <div>
-            <div class="max-w-md bg-white p-8 rounded-md shadow-md mt-12 mx-auto">
+            <div className="max-w-md bg-white p-8 rounded-md shadow-md mt-12 mx-auto">
         {/* <!-- Profile Picture --> */}
-        <div class="flex items-center justify-center mb-4">
+        <div className="flex items-center justify-center mb-4">
             <img src={mypic1} alt="Sidharth pic" className="w-20 h-20 object-cover rounded-full"/>
         </div>
 
         {/* <!-- Brief About Me --> */}
-        <p class="text-gray-700 mb-4">
+        <h1 className="text-gray-700 mb-4">
         Hello! I'm <strong>Sidharth Surya</strong>, a committed <strong>MERN Stack Developer</strong> currently working at IDFC FIRST BANK. Eager to contribute to innovative projects and expand my knowledge!
-        </p>
+        </h1>
 
         {/* <!-- Social Media Links --> */}
-        <div class="flex justify-center items-center">
+        <div className="flex justify-center items-center">
             {/* <!-- LinkedIn Profile --> */}
-            <a href="https://www.linkedin.com/in/sidharth-surya/" target="_blank" class="text-blue-500 hover:text-blue-700 mx-6">
+            <a href="https://www.linkedin.com/in/sidharth-surya/" target="_blank" className="text-blue-500 hover:text-blue-700 mx-6">
                 
                 <img src={linkedin} alt="LinkedIn-logo" className="w-7 items-center inline-block"/>
             </a>
 
             {/* <!-- GitHub Profile --> */}
-            <a href="https://github.com/imsidharthsurya" target="_blank" class="text-blue-500 hover:text-blue-700 mx-6">
+            <a href="https://github.com/imsidharthsurya" target="_blank" className="text-blue-500 hover:text-blue-700 mx-6">
                 
                <img src={github} alt="github-logo" className="w-7 items-center inline-block"/> 
             </a>
-            <a href="https://www.instagram.com/sid2op/" target="_blank" class="text-blue-500 hover:text-blue-700 mx-6">
+            <a href="https://www.instagram.com/sid2op/" target="_blank" className="text-blue-500 hover:text-blue-700 mx-6">
                 
                <img src={insta} alt="insta-logo" className="w-7 items-center inline-block"/> 
             </a>
