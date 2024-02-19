@@ -1,0 +1,46 @@
+import { render,screen } from "@testing-library/react";
+import Body from "../Body";
+import { act } from "react-dom/test-utils";
+import "@testing-library/jest-dom"
+import { BrowserRouter } from "react-router-dom";
+import MOCK_DATA from "../mocks/resList.json"
+import RestaurantCard from "../RestaurantCard";
+
+// global.fetch=jest.fn(()=>{
+// 		return Promise.resolve({
+// 				json:()=>{
+// 					return Promise.resolve(MOCK_DATA)
+// 				}
+// 		})
+// })
+global.useRestaurantList=jest.fn(()=>{
+	return MOCK_DATA
+})
+// global.navigator.getCurrentPosition=jest.fn(()=>{
+// 	return Promise.resolve({
+// 		position:{
+// 			coords:{
+// 				latitude:'74.447',
+// 				longitude:'78.39'
+// 			}
+// 		}
+// 	})
+// })
+//b/c fetch also returns some promise
+//on which json fn. which finally return the data
+
+it("should search resList for Biriyani",async()=>{
+   await act(async()=>{
+    return render(<BrowserRouter><Body/><RestaurantCard/></BrowserRouter>)
+   }) 
+
+		const cardBeforeSearch=screen.getAllByTestId("rest-list");
+		expect(cardBeforeSearch.length).toBe(9);
+		
+		const searchBtn=screen.getByRole("button",{name:"Search"});
+		const searchInput=screen.getByTestId("search-input");
+		fireEvent.change(searchInput,{target:{value:"Take"}});
+		fireEvent.click("searchBtn");
+		const cardsAfterSearch=screen.getAllByTestId("rest-list");
+		expect(cardsAfterSearch.length).toBe(3);
+})
