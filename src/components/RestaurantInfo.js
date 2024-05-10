@@ -37,8 +37,11 @@ const RestaurantInfo=()=>{
             console.log("the latitude & longitude is: ",jsonLoc)
             const {lat,lon}=jsonLoc;
             console.log("url to get restrauntInfo is: ",REST_INFO_URL+`lat=${lat}&lng=${lon}&restaurantId=${resId}`)
+    
             const restdata=await fetch(REST_INFO_URL+`lat=${lat}&lng=${lon}&restaurantId=${resId}`);
             const json=await restdata.json();
+
+            
             setRestInfo(json.data.cards);//array of restaurant data
         },async(error)=>{
             console.log("unable to access the location")
@@ -49,8 +52,11 @@ const RestaurantInfo=()=>{
             console.log("the latitude & longitude is: ",jsonLoc)
             const {lat,lon}=jsonLoc;
             console.log("url to get restrauntInfo is: ",REST_INFO_URL+`lat=${lat}&lng=${lon}&restaurantId=${resId}`)
+            
             const restdata=await fetch(REST_INFO_URL+`lat=${lat}&lng=${lon}&restaurantId=${resId}`);
             const json=await restdata.json();
+
+            
             setRestInfo(json.data.cards);//array of restaurant data
         })
         // console.log(lat,lng)
