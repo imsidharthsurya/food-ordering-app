@@ -68,25 +68,33 @@ const RestaurantInfo=()=>{
     }
     
     //filter out all the listItem categories to display the item menu
-    const categories=restInfo[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((item)=>{
+    let categoryIndex=0;
+    for(var i=0;i<restInfo.length;i++){
+        if(restInfo[i].groupedCard){
+            categoryIndex=i;
+            break;
+        }
+    }
+    console.log("category index is: ",categoryIndex)
+    const categories=restInfo[categoryIndex]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter((item)=>{
         return item.card.card["@type"]==="type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory" || item.card.card["@type"]==="type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
     })
-    console.log(categories)
+    console.log("categories is: ",categories)
 
     return (
         <div className="w-[70%] mt-12 mx-auto">
             <div className="restaurant-info-main-div">
                 <div className="flex justify-between">
                     <div>
-                        <h2 className="rest-name font-bold text-xl">{restInfo[0].card.card.info.name}</h2>
-                        <p className="rest-details text-sm font-light mt-2">{restInfo[0].card.card.info.cuisines.join(", ")}</p>
-                        <p className="rest-details text-sm font-light">{restInfo[0].card.card.info.locality +", "+restInfo[0].card.card.info.sla.lastMileTravelString}</p>
-                        {restInfo[0].card.card.info.feeDetails.message?<p className="rest-details text-sm font-light mt-4"><img src={IMG_URL+restInfo[0].card.card.info.feeDetails.icon} className="rest-delivery-logo w-6 inline"/>{" "+restInfo[0].card.card.info.feeDetails.message} </p>:null}
+                        <h2 className="rest-name font-bold text-xl">{restInfo[2].card.card.info.name}</h2>
+                        <p className="rest-details text-sm font-light mt-2">{restInfo[2].card.card.info.cuisines.join(", ")}</p>
+                        <p className="rest-details text-sm font-light">{restInfo[2].card.card.info.locality +", "+restInfo[2].card.card.info.sla.lastMileTravelString}</p>
+                        {restInfo[2].card.card.info.feeDetails.message?<p className="rest-details text-sm font-light mt-4"><img src={IMG_URL+restInfo[2].card.card.info.feeDetails.icon} className="rest-delivery-logo w-6 inline"/><div dangerouslySetInnerHTML={{ __html: " "+restInfo[2].card.card.info.feeDetails.message }} />; </p>:null}
                     </div>
                     <div className="inline-block p-2 border border-gray-300 border-solid h-20">
-                        <img src={star} className="inline-block w-5 relative bottom-0.5"/><span className="inline-block text-green-700 font-bold">&nbsp;{restInfo[0].card.card.info.avgRatingString}</span>
+                        <img src={star} className="inline-block w-5 relative bottom-0.5"/><span className="inline-block text-green-700 font-bold">&nbsp;{restInfo[2].card.card.info.avgRatingString}</span>
                         <hr className="my-2"/>
-                        <p className="text-xs text-gray-500 font-semibold tracking-tighter">{restInfo[0].card.card.info.totalRatingsString}</p>
+                        <p className="text-xs text-gray-500 font-semibold tracking-tighter">{restInfo[2].card.card.info.totalRatingsString}</p>
                         
                     </div>
                 </div>
